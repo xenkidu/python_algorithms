@@ -14,20 +14,30 @@ class QuickFindUF:
                 if self.arr[i] == pid:
                     self.arr[i] = qid
 
+    def find(self):
+        pass
+
+    def count(self):
+        s = set()
+        for p in self.arr:
+            s.add(p)
+        return len(s)
+
+
     def get_arr(self):
         return self.arr
 
 if __name__ == '__main__':
-    qf = QuickFindUF(10)
+    file = open('algs4-data/tinyUF.txt', 'r')
 
-    print(qf.connected(0,1))
-    qf.union(3,6)
-    qf.union(0,3)
-    qf.union(1,6)
-    print(qf.connected(0,1))
-    print(qf.connected(0,6))
-    print(qf.get_arr())
-    qf.union(2,5)
-    qf.union(8,9)
-    qf.union(5,9)
-    print(qf.get_arr())
+    N = int(file.readline())
+    uf = QuickFindUF(N)
+
+    for line in file:
+        p, q = line.split(' ')
+        p, q = int(p), int(q)
+        if not uf.connected(p, q):
+            uf.union(p, q)
+            print(f'{p} {q}')
+
+    file.close()
