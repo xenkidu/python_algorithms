@@ -1,31 +1,34 @@
 class QuickFindUF:
 
     def __init__(self, n):
-        self.arr = [i for i in range(n)]
+        self.id = [i for i in range(n)]
 
     def connected(self, p, q):
-        return self.arr[p] == self.arr[q]
+        return self.id[p] == self.id[q]
 
     def union(self, p, q):
         if not self.connected(p, q):
-            pid = self.arr[p]
-            qid = self.arr[q]
-            for i in range(len(self.arr)):
-                if self.arr[i] == pid:
-                    self.arr[i] = qid
+            pid = self.id[p]
+            qid = self.id[q]
+            for i in range(len(self.id)):
+                if self.id[i] == pid:
+                    self.id[i] = qid
 
     def find(self):
         pass
 
     def count(self):
         s = set()
-        for p in self.arr:
+        for p in self.id:
             s.add(p)
         return len(s)
 
+    def root(self, i):
+        while i != self.id[i]:
+            i = self.id[i]
 
-    def get_arr(self):
-        return self.arr
+    def get_id(self):
+        return self.id
 
 if __name__ == '__main__':
     file = open('algs4-data/tinyUF.txt', 'r')
