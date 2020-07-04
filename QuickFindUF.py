@@ -8,11 +8,9 @@ class QuickFindUF:
 
     def union(self, p, q):
         if not self.connected(p, q):
-            pid = self.id[p]
-            qid = self.id[q]
-            for i in range(len(self.id)):
-                if self.id[i] == pid:
-                    self.id[i] = qid
+            i = self.root(p)
+            j = self.root(q)
+            self.id[i] = j
 
     def find(self):
         pass
