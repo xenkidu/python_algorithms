@@ -4,7 +4,7 @@ class QuickFindUF:
         self.id = [i for i in range(n)]
 
     def connected(self, p, q):
-        return self.id[p] == self.id[q]
+        return self.root(p) == self.root(q)
 
     def union(self, p, q):
         if not self.connected(p, q):
@@ -26,6 +26,7 @@ class QuickFindUF:
     def root(self, i):
         while i != self.id[i]:
             i = self.id[i]
+        return i
 
     def get_id(self):
         return self.id
