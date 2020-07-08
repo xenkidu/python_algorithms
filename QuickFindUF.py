@@ -19,9 +19,6 @@ class QuickFindUF:
             self.id[j] = i
             self.sz[i] += self.sz[j]
 
-    def find(self):
-        pass
-
     def count(self):
         s = set()
         for p in self.id:
@@ -30,34 +27,27 @@ class QuickFindUF:
 
     def root(self, i):
         while i != self.id[i]:
+            self.id[i] = self.id[self.id[i]]
             i = self.id[i]
         return i
 
     def get_id(self):
         return self.id
 
-def qf_test():
-    file = open('algs4-data/tinyUF.txt', 'r')
+
+def uf_test():
+    file = open('algs4-data/mediumUF.txt', 'r')
     N = int(file.readline())
     uf = QuickFindUF(N)
     for line in file:
         p, q = line.split(' ')
         p, q = int(p), int(q)
-        if not uf.connected(p, q):
-            uf.union(p, q)
+        # if not uf.connected(p, q):
+        uf.union(p, q)
+        # print(f'{p}, {q}')
     file.close()
 
 if __name__ == '__main__':
     import timeit
-    print(timeit.timeit(qf_test))
-
-    file = open('algs4-data/tinyUF.txt', 'r')
-    N = int(file.readline())
-    uf = QuickFindUF(N)
-    for line in file:
-        p, q = line.split(' ')
-        p, q = int(p), int(q)
-        if not uf.connected(p, q):
-            uf.union(p, q)
-            print(f'{p} {q}')
-    file.close()
+    print(timeit.timeit(uf_test, number=10000))
+    # uf_test()
