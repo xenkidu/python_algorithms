@@ -4,6 +4,9 @@ from EdgeWeightedDigraph import EdgeWeightedDigraph
 
 class DijkstraSP:
     def __init__(self, G, s):
+        """
+        TODO: Get a working Priority Queue that implements decreasing and existing edge.
+        """
         self.distTo = [] * G.V()
         self.edgeTo = [] * G.V()
         self.pq = PriorityQueue()
