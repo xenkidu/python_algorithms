@@ -1,8 +1,16 @@
 class QuickFindUF:
 
-    def __init__(self, n):
+    def __init__(self, file):
+        file = open(file, 'r')
+        n = int(file.readline())
         self.id = [i for i in range(n)]
-        self.sz = [1 for _ in range(n)]
+        self.sz = [1] * n
+        for line in file:
+            p, q = map(int, line.split(' '))
+            # if not uf.connected(p, q):
+            self.union(p, q)
+            # print(f'{p}, {q}')
+        file.close()
 
     def connected(self, p, q):
         return self.root(p) == self.root(q)
@@ -10,14 +18,13 @@ class QuickFindUF:
     def union(self, p, q):
         i = self.root(p)
         j = self.root(q)
-        if i == j:
-            return
-        if self.sz[i] < self.sz[j]:
-            self.id[i] = j
-            self.sz[j] += self.sz[i]
-        else:
-            self.id[j] = i
-            self.sz[i] += self.sz[j]
+        if i != j:
+            if self.sz[i] < self.sz[j]:
+                self.id[i] = j
+                self.sz[j] += self.sz[i]
+            else:
+                self.id[j] = i
+                self.sz[i] += self.sz[j]
 
     def count(self):
         s = set()
@@ -35,19 +42,13 @@ class QuickFindUF:
         return self.id
 
 
-def uf_test():
-    file = open('algs4-data/mediumUF.txt', 'r')
-    N = int(file.readline())
-    uf = QuickFindUF(N)
-    for line in file:
-        p, q = line.split(' ')
-        p, q = int(p), int(q)
-        # if not uf.connected(p, q):
-        uf.union(p, q)
-        # print(f'{p}, {q}')
-    file.close()
 
 if __name__ == '__main__':
     import timeit
-    print(timeit.timeit(uf_test, number=10000))
+
+    # print(timeit.timeit(QuickFindUF('algs4-data/tinyUF.txt'), number=10000))
+
     # uf_test()
+
+    uf = QuickFindUF('algs4-data/mediumUF.txt')
+    print(uf.count())
