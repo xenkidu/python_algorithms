@@ -81,8 +81,6 @@ class TestGraph(unittest.TestCase):
     def test_average_degree(self):
         self.assertTrue(average_degree(self.G) == 2.0)
 
+
 if __name__ == '__main__':
     unittest.main()
-
-    G = Graph(file='./algs4-data/tinyG.txt')
-
