@@ -22,7 +22,6 @@ class Graph:
         else:
             raise ValueError("No value was passed to constructor.")
 
-
     # adds edge (v,w)
     def add_edge(self, v, w):
         self.adj_list[v].append(w)
@@ -46,18 +45,22 @@ class Graph:
 
 
 # compute the degree of vertex v
-def degree(graph, v):
+def degree(G, v):
     degree = 0
-    for w in graph.adj(v):
+    for w in G.adj(v):
         degree += 1
     return degree
 
 
-def max_degree(graph):
+def max_degree(G):
     max_ = 0
-    for v in range(graph.V()):
-        max_ = max(max_, degree(graph, v))
+    for v in range(G.V()):
+        max_ = max(max_, degree(G, v))
     return max_
+
+
+def average_degree(G):
+    return 2 * G.E() / G.V()
 
 
 class TestGraph(unittest.TestCase):
@@ -74,6 +77,9 @@ class TestGraph(unittest.TestCase):
 
     def test_max_degree(self):
         self.assertTrue(max_degree(self.G) == 4)
+
+    def test_average_degree(self):
+        self.assertTrue(average_degree(self.G) == 2.0)
 
 if __name__ == '__main__':
     unittest.main()
