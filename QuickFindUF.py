@@ -1,16 +1,22 @@
 class QuickFindUF:
 
-    def __init__(self, file):
-        file = open(file, 'r')
-        n = int(file.readline())
-        self.id = [i for i in range(n)]
-        self.sz = [1] * n
-        for line in file:
-            p, q = map(int, line.split(' '))
-            # if not uf.connected(p, q):
-            self.union(p, q)
-            # print(f'{p}, {q}')
-        file.close()
+    def __init__(self, file=None, n=None):
+        if file is not None:
+            file = open(file, 'r')
+            n = int(file.readline())
+            self.id = [i for i in range(n)]
+            self.sz = [1] * n
+            for line in file:
+                p, q = map(int, line.split(' '))
+                # if not uf.connected(p, q):
+                self.union(p, q)
+                # print(f'{p}, {q}')
+            file.close()
+        elif n is not None:
+            self.id = [i for i in range(n)]
+            self.sz = [1] * n
+        else:
+            raise AttributeError
 
     def connected(self, p, q):
         return self.root(p) == self.root(q)
