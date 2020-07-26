@@ -3,7 +3,6 @@ PercolationStats performs a serious of computational experiments and provides st
 """
 from Percolation import Percolation
 import math
-from statistics import stdev
 
 
 class PercolationStats:
@@ -15,6 +14,7 @@ class PercolationStats:
             p = Percolation(n)
             p.run_simulation()
             self.results.append(p.percolation_threshold())
+        self.print_results()
 
     def mean(self):
         return sum(self.results) / self.trials
@@ -32,11 +32,11 @@ class PercolationStats:
         mean = self.mean()
         return mean + ((1.96 * self.stddev()) / math.sqrt(self.trials))
 
+    def print_results(self):
+        print(f"{'mean':<25}= {self.mean()}")
+        print(f"{'stddev':<25}= {self.stddev()}")
+        print(f"{'95% Confidence Interval':<25}= [{self.confidence_low()}, {self.confidence_high()}]")
+
 
 if __name__ == '__main__':
-    n = 200
-    trials = 100
-    perc_stats = PercolationStats(n, trials)
-    print(f"{'mean':<25}= {perc_stats.mean()}")
-    print(f"{'stddev':<25}= {perc_stats.stddev()}")
-    print(f"{'95% Confidence Interval':<25}= [{perc_stats.confidence_low()}, {perc_stats.confidence_high()}]")
+    percolation_stats = PercolationStats(200, 100)
