@@ -6,13 +6,13 @@ class DirectedEdge:
         self.weight = weight
 
     def __str__(self):
-        return f'({self.v}, {self.w}) {self.weight}'
+        return f'({self.v} -> {self.w}) {self.weight}'
 
-    def weight(self):
+    def get_weight(self):
         return self.weight
 
-    def v(self):
+    def get_from(self):
         return self.v
 
-    def w(self):
+    def get_to(self):
         return self.w

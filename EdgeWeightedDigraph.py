@@ -1,6 +1,6 @@
 import collections
 from DirectedEdge import DirectedEdge
-
+from Bag import Bag
 
 class EdgeWeightedDigraph:
     def __init__(self, file):
