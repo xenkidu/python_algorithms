@@ -20,6 +20,19 @@ class Selection:
         return a
 
 
+class Insertion:
+
+    @staticmethod
+    def sort(a):
+        for i in range(len(a)):
+            for j in reversed(range(1, i + 1)):
+                if a[j] < a[j - 1]:
+                    a[j], a[j - 1] = a[j - 1], a[j]
+                else:
+                    break
+        return a
+
+
 class TestSelection(unittest.TestCase):
 
     def test_selection_sorts_positive_integers(self):
@@ -27,8 +40,19 @@ class TestSelection(unittest.TestCase):
         self.assertEqual(sorted(arr), Selection.sort(arr))
 
     def test_selection_sorts_random_integers(self):
-        arr = [randint(-200, 200) for _ in range(100)]
+        arr = [randint(-200, 200) for _ in range(20)]
         self.assertEqual(sorted(arr), Selection.sort(arr))
+
+
+class TestInsertion(unittest.TestCase):
+
+    def test_insertion_sorts_positive_integers(self):
+        arr = [5, 1, 7, 99, 33, 13, 12, 11, 10, 10, 21, 19, 35]
+        self.assertEqual(sorted(arr), Insertion.sort(arr))
+
+    def test_insertion_sorts_random_integers(self):
+        arr = [randint(-200, 200) for _ in range(20)]
+        self.assertEqual(sorted(arr), Insertion.sort(arr))
 
 
 if __name__ == '__main__':
