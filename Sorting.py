@@ -1,9 +1,8 @@
-"""
-This library contains algorithms for sorting.
-"""
+""" This library contains algorithms for sorting. """
 import timeit
 import unittest
 from random import randint
+import copy
 
 
 class Selection:
@@ -38,6 +37,7 @@ class Merge:
 
     @staticmethod
     def __merge(a, aux, low, mid, hi):
+        """ Make a copy of a[], then merge the two sorted lists into back into a[]."""
         for k in range(low, hi + 1):
             aux[k] = a[k]
 
@@ -75,34 +75,40 @@ class Merge:
 class TestSelection(unittest.TestCase):
 
     def test_selection_sorts_positive_integers(self):
-        arr = [5, 1, 7, 99, 33, 13, 12, 11, 10, 10, 21, 19, 35]
-        self.assertEqual(sorted(arr), Selection.sort(arr))
+        arr1 = [5, 1, 7, 99, 33, 13, 12, 11, 10, 10, 21, 19, 35]
+        arr2 = copy.deepcopy(arr1)
+        self.assertEqual(sorted(arr1), Selection.sort(arr2))
 
     def test_selection_sorts_random_integers(self):
-        arr = [randint(-200, 200) for _ in range(20)]
-        self.assertEqual(sorted(arr), Selection.sort(arr))
+        arr1 = [randint(-200, 200) for _ in range(100)]
+        arr2 = copy.deepcopy(arr1)
+        self.assertEqual(sorted(arr1), Selection.sort(arr2))
 
 
 class TestInsertion(unittest.TestCase):
 
     def test_insertion_sorts_positive_integers(self):
-        arr = [5, 1, 7, 99, 33, 13, 12, 11, 10, 10, 21, 19, 35]
-        self.assertEqual(sorted(arr), Insertion.sort(arr))
+        arr1 = [5, 1, 7, 99, 33, 13, 12, 11, 10, 10, 21, 19, 35]
+        arr2 = copy.deepcopy(arr1)
+        self.assertEqual(sorted(arr1), Insertion.sort(arr2))
 
     def test_insertion_sorts_random_integers(self):
-        arr = [randint(-200, 200) for _ in range(20)]
-        self.assertEqual(sorted(arr), Insertion.sort(arr))
+        arr1 = [randint(-200, 200) for _ in range(100)]
+        arr2 = copy.deepcopy(arr1)
+        self.assertEqual(sorted(arr1), Insertion.sort(arr2))
 
 
 class TestMerge(unittest.TestCase):
 
     def test_merge_sorts_positive_integers(self):
-        arr = [5, 1, 7, 99, 33, 13, 12, 11, 10, 10, 21, 19, 35]
-        self.assertEqual(sorted(arr), Merge.sort(arr))
+        arr1 = [5, 1, 7, 99, 33, 13, 12, 11, 10, 10, 21, 19, 35]
+        arr2 = copy.deepcopy(arr1)
+        self.assertEqual(sorted(arr1), Merge.sort(arr2))
 
     def test_merge_sorts_random_integers(self):
-        arr = [randint(-200, 200) for _ in range(20)]
-        self.assertEqual(sorted(arr), Merge.sort(arr))
+        arr1 = [randint(-200, 200) for _ in range(200)]
+        arr2 = copy.deepcopy(arr1)
+        self.assertEqual(sorted(arr1), Merge.sort(arr2))
 
 
 if __name__ == '__main__':
